@@ -28,7 +28,7 @@ export class AuthentificationComponent {
       data => {
         // Traitement en cas de succès de la connexion
         console.log('Connecté avec succès', data);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/ajout-client']);
       },
       error => {
         // Traitement en cas d'échec de la connexion
