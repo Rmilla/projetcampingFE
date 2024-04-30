@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="router.url !== '/authentification'">
   <div class="container-fluid">
        <a class="navbar-brand" href="#">Navigation</a>
        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,6 +14,9 @@
            </li>
            <li class="nav-item">
             <a class="nav-link" routerLink="/stat-camping" routerLinkActive="active">Camping</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/authentification" routerLinkActive="active">Login</a>
           </li>
            <!-- Espace pour rajouter des liens -->
          </ul>
