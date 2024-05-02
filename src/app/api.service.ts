@@ -39,22 +39,9 @@ export class ApiService {
       // Retourner un Observable vide ou une valeur par défaut
       return of([]);
   }}
-    
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
+  
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
+ }  
 }

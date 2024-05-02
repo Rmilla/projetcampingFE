@@ -16,7 +16,7 @@ export class AuthentificationComponent {
   password!: string;
   test:any;
 
-  constructor(private apiService: ApiService,private router: Router) { }
+  constructor(private apiService: ApiService, private router: Router) { }
 
   loadTest(){this.apiService.printF().subscribe((data: any) => {
     this.test = data;
@@ -28,7 +28,7 @@ export class AuthentificationComponent {
       data => {
         // Traitement en cas de succès de la connexion
         console.log('Connecté avec succès', data);
-        this.router.navigate(['/ajout-client']);
+        this.router.navigate(['/stat-general']);
       },
       error => {
         // Traitement en cas d'échec de la connexion
