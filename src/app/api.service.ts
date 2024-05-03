@@ -44,4 +44,8 @@ export class ApiService {
     const token = localStorage.getItem('token');
     return !!token;
  }  
+
+ addClient(clientData: any): Observable<any> {
+  return this.http.post<any>('http://127.0.0.1:8000/client/', clientData);
+ }
 }

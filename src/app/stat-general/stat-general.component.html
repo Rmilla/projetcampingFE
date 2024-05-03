@@ -1,14 +1,34 @@
 <h1>Stats a insérer</h1>
-<div  class="mt-4">
-    <!-- <ngx-charts-line-chart
+<!-- <div  class="mt-4">
+    <ngx-charts-line-chart
         [xAxis]="true"
         [yAxis]="true"
         [showXAxisLabel]="true"
         [showYAxisLabel]="true"
         xAxisLabel="Matchs"
         yAxisLabel="Nombre de Buts"
-        [results]="graphDataGoals"
+        [results]="données"
         [showGridLines]="false"
         [scheme]="'forest'">
-    </ngx-charts-line-chart> -->
-</div>
+    </ngx-charts-line-chart>
+</div> -->
+
+<div *ngIf="campings.length > 0; else noCampings">
+    <h2>Camping List</h2>
+    <ul>
+       <li *ngFor="let camping of campings">
+         <h3>{{ camping.camping_name }}</h3>
+         <p>Postal Code: {{ camping.postal_code }}</p>
+         <p>City: {{ camping.camping_city }}</p>
+         <p>Country: {{ camping.camping_country }}</p>
+       </li>
+    </ul>
+   </div>
+   
+   <select>
+    <option *ngFor="let camping of campings" [value]="camping.id">{{ camping.camping_name }}</option>
+   </select>
+
+   <ng-template #noCampings>
+    <p>No campings found.</p>
+   </ng-template>

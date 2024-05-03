@@ -1,4 +1,4 @@
-<form class="container p-5">
+<form class="container p-5" (ngSubmit)="onSubmit()">
     <p>Ajout de client</p>
     <div class="mb-3">
 
@@ -11,16 +11,15 @@
     </div>
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown button
+        Camping
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="#">Option 1</a></li>
-        <li><a class="dropdown-item" href="#">Option 2</a></li>
-        <li><a class="dropdown-item" href="#">Option 3</a></li>
+        <li><a class="dropdown-item" *ngFor="let camping of campings" (click)="onCampingSelected(camping.id)">{{ camping.camping_name }}</a></li>
       </ul>
     </div>
+    <input type="hidden" name="selectedCampingId" [(ngModel)]="selectedCampingId">
     <div class="d-flex justify-content-between">
-      <button class="btn btn-secondary"> Déconnexions </button>
-      <button class="btn btn-primary"> Ajouter </button>
+      <button class="btn btn-secondary" type="button"> Déconnexions </button>
+      <button class="btn btn-primary" type="submit"> Ajouter </button>
     </div>
 </form>

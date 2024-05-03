@@ -8,12 +8,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   providers:[ApiService],
-  imports: [NgIf, RouterOutlet, RouterLink, RouterLinkActive, AuthentificationComponent, BanniereComponent, FooterComponent, AjoutClientComponent, AjoutClientComponent, NavbarComponent, HttpClientModule],
+  imports: [NgFor, NgIf, RouterOutlet, RouterLink, RouterLinkActive, AuthentificationComponent, BanniereComponent, FooterComponent, AjoutClientComponent, AjoutClientComponent, NavbarComponent, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
