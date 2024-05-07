@@ -16,10 +16,18 @@
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <li><a class="dropdown-item" *ngFor="let camping of campings" (click)="onCampingSelected(camping.id)">{{ camping.camping_name }}</a></li>
       </ul>
+      <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        vehicule
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" *ngFor="let vehicule of vehicules" (click)="onCampingSelected(camping.id)">{{ camping.camping_name }}</a></li>
+      </ul> -->
     </div>
     <input type="hidden" name="selectedCampingId" [(ngModel)]="selectedCampingId">
     <div class="d-flex justify-content-between">
+
       <button class="btn btn-secondary" type="button"> Déconnexions </button>
       <button class="btn btn-primary" type="submit"> Ajouter </button>
     </div>
+    
 </form>
