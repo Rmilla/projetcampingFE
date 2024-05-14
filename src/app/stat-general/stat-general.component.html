@@ -23,12 +23,12 @@
          <p>Country: {{ camping.camping_country }}</p>
        </li>
     </ul>
-   </div>
+</div>
    
-   <select>
+<select>
     <option *ngFor="let camping of campings" [value]="camping.id">{{ camping.camping_name }}</option>
-   </select>
+</select>
 
-   <ng-template #noCampings>
+<ng-template #noCampings>
     <p>No campings found.</p>
-   </ng-template>
+</ng-template>

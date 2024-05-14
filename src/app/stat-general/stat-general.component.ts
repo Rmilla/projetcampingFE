@@ -11,12 +11,14 @@ import { CampingService } from '../services/camping.service';
 })
 export class StatGeneralComponent implements OnInit {
   campings: any[] = [];
+  selectedCampingId: string | null = null;
 
   constructor(private CampingService: CampingService) { }
  
   ngOnInit(): void {
      this.CampingService.getCampings().subscribe(data => {
        this.campings = data;
+       console.log('Campings:', this.campings);
      });
   }
 
