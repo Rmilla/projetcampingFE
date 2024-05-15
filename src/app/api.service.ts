@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs';
 export class ApiService {
   private token: string | null = null;
   private headers: HttpHeaders;
+  private url = 'http://127.0.0.1:8000/gen_em_group/';
 
   constructor(private http: HttpClient) {
     // Initialisez les headers ici si nécessaire, mais sans utiliser localStorage
@@ -61,10 +62,13 @@ export class ApiService {
         'Authorization': `Bearer ${this.token}`,
         'Content-Type': 'application/json'
       });
-      return this.http.post<any>('http://127.0.0.1:8000/client/', clientData, { headers: this.headers });
+      return this.http.post<any>('http://127.0.0.1:8000/insert_value/', clientData, { headers: this.headers });
     } else {
       // Gérez le cas où le token n'est pas disponible
       return of([]);
     }
+  }
+  getEmissionsData(): Observable<any> {
+    return this.http.get<any>(this.url);
   }
 }

@@ -20,6 +20,7 @@ export class AjoutClientComponent implements OnInit {
   selectedCampingId: string = '';
   selectedCampingName: string = '';
   selectedVehicule: string = '';
+  annee: number = 0;
 
   constructor(private CampingService: CampingService, private apiService: ApiService, private VehiculeService: VehiculeService) { }
  
@@ -52,7 +53,8 @@ export class AjoutClientComponent implements OnInit {
       client_city: this.ville, 
       client_country: this.pays,
       selectedCampingId: this.selectedCampingId,
-      selectedVehiculeId: this.selectedVehicule
+      selectedVehiculeId: this.selectedVehicule,
+      year: Number(this.annee)
     };
 
     this.apiService.addClient(clientData).subscribe(

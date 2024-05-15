@@ -1,6 +1,8 @@
 import { Component, OnInit  } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CampingService } from '../services/camping.service';
+import { ApiService } from '../api.service';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-stat-general',
@@ -11,19 +13,12 @@ import { CampingService } from '../services/camping.service';
 })
 export class StatGeneralComponent implements OnInit {
   campings: any[] = [];
-  selectedCampingId: string | null = null;
 
-  constructor(private CampingService: CampingService) { }
+  constructor(private apiservice: ApiService) {}
  
   ngOnInit(): void {
-     this.CampingService.getCampings().subscribe(data => {
-       this.campings = data;
-       console.log('Campings:', this.campings);
-     });
+    this.apiservice.getEmissionsData().subscribe(data => {
+      this.apiservice = data;
+    });
   }
-
-  onCampingSelected(campingId: string): void {
-    console.log('Camping sélectionné :', campingId);
-    // Effectuez ici l'action souhaitée avec l'ID du camping sélectionné
-   }
 }
