@@ -1,23 +1,26 @@
 <form class="container p-5" (ngSubmit)="onSubmit()">
     <p>Ajout de client</p>
     <div class="mb-3">
-
       <label for="ville" class="form-label">Ville</label>
       <input type="text" class="form-control" id="ville" [(ngModel)]="ville" name="ville">
     </div>
+
     <div class="mb-3">
       <label for="pays" class="form-label">Pays</label>
       <input type="text" class="form-control" id="pays" [(ngModel)]="pays" name="pays">
     </div>
+
     <div class="mb-3">
       <label for="ville-camping" class="form-label">Ville du camping</label>
       <input type="text" class="form-control" id="ville-camping">
     </div>
+
     <div class="mb-3">
       <label for="annees" class="form-label">Années</label>
       <input type="number" class="form-control" id="annees" [(ngModel)]="annee" name="annee">
     </div>
-    <div class="d-flex justify-content-between">
+
+  <div class="d-flex justify-content-between">
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Camping
@@ -26,10 +29,13 @@
         <a class="dropdown-item" *ngFor="let camping of campings" (click)="onCampingSelected(camping.id)">{{ camping.camping_name }}</a>
       </div>
     </div>
+
+
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Véhicule
       </button>
+
       <div class="dropdown-menu">
         <a class="dropdown-item" *ngFor="let vehicule of vehicules" (click)="onVehiculeSelected(vehicule.id)">{{ vehicule.name }}</a>
       </div>
@@ -38,7 +44,7 @@
 
     <input type="hidden" name="selectedCampingId" [(ngModel)]="selectedCampingId">
 
-    <input type="hidden" name="selectedVehicule" [(ngModel)]="selectedVehicule">
+    <input type="hidden" name="selectedVehicule" class="form-control" id="vehicle" [(ngModel)]="selectedVehicule">
     
     <div class="d-flex justify-content-between">
 

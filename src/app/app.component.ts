@@ -14,7 +14,7 @@ import { NgFor } from '@angular/common';
   selector: 'app-root',
   standalone: true,
   providers:[ApiService],
-  imports: [NgFor, NgIf, RouterOutlet, RouterLink, RouterLinkActive, AuthentificationComponent, BanniereComponent, FooterComponent, AjoutClientComponent, AjoutClientComponent, NavbarComponent, HttpClientModule],
+  imports: [NgFor, NgIf, RouterOutlet, RouterLink, RouterLinkActive, AuthentificationComponent, BanniereComponent, FooterComponent, AjoutClientComponent, NavbarComponent, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

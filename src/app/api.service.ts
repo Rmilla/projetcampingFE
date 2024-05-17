@@ -10,10 +10,12 @@ export class ApiService {
   private token: string | null = null;
   private headers: HttpHeaders;
   private url = 'http://127.0.0.1:8000/gen_em_group/';
+  private selectedVehicule: string;
 
   constructor(private http: HttpClient) {
     // Initialisez les headers ici si nécessaire, mais sans utiliser localStorage
     this.headers = new HttpHeaders();
+    this.selectedVehicule = '';
   }
 
   login(username: string, password: string): Observable<any> {
@@ -55,20 +57,23 @@ export class ApiService {
   }
 
   addClient(clientData: any): Observable<any> {
+    const requestData = {
+      ...clientData,
+       vehicle: this.selectedVehicule
+   };
     // Assurez-vous que le token est récupéré de manière sécurisée pour SSR
     this.token = typeof window!== 'undefined'? localStorage.getItem('token') : null;
-    if (this.token) {
       this.headers = new HttpHeaders({
         'Authorization': `Bearer ${this.token}`,
         'Content-Type': 'application/json'
       });
-      return this.http.post<any>('http://127.0.0.1:8000/insert_value/', clientData, { headers: this.headers });
-    } else {
+      return this.http.post<any>('http://127.0.0.1:8000/insert_value/', requestData , { headers: this.headers });
       // Gérez le cas où le token n'est pas disponible
-      return of([]);
-    }
   }
   getEmissionsData(): Observable<any> {
     return this.http.get<any>(this.url);
   }
+  // getEmissionsByCamping(): Observable<any[]> {
+  //   // Supposons que cette méthode renvoie les données sous forme de tableau d'objets
+  // }
 }
