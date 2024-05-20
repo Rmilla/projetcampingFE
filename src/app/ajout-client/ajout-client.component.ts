@@ -17,9 +17,9 @@ export class AjoutClientComponent implements OnInit {
   ville: string = '';
   pays: string = '';
   vehicules: any[] = [];
-  selectedCampingId: string = '';
   selectedCampingName: string = '';
   selectedVehicule: string = '';
+  selectedCamping: string = '';
   annee: number = 0;
 
   constructor(private CampingService: CampingService, private apiService: ApiService, private VehiculeService: VehiculeService) { }
@@ -33,12 +33,12 @@ export class AjoutClientComponent implements OnInit {
     });
   }
 
-  onCampingSelected(campingId: string): void {
-    console.log('Camping sélectionné :', campingId);
+  onCampingSelected(campingName: string): void {
+    console.log('Camping sélectionné :', campingName);
     // Effectuez ici l'action souhaitée avec l'ID du camping sélectionné
-    const selectedCamping = this.campings.find(camping => camping.id === campingId);
+    const selectedCamping = this.campings.find(camping => camping.name === campingName);
     if (selectedCamping) {
-      this.selectedCampingName = selectedCamping.name; 
+      this.selectedCamping = campingName; 
     }
   }
 
@@ -48,25 +48,23 @@ export class AjoutClientComponent implements OnInit {
 
   }
 
-   onSubmit(): void {
+  onSubmit(): void {
     const clientData = {
       client_city: this.ville, 
       client_country: this.pays,
-      selectedCampingId: this.selectedCampingId,
+      selectedCampingName: this.selectedCamping,
       selectedVehiculeId: this.selectedVehicule,
       year: Number(this.annee)
     };
-
-    this.apiService.addClient(clientData).subscribe(
-      response => {
+  
+    this.apiService.addClient(clientData).subscribe({
+      next: (response) => {
         console.log('Client ajouté avec succès', response);
-        
       },
-      error => {
+      error: (error) => {
         console.error('Erreur lors de l\'ajout du client', error);
-        
       }
-    );
+    });
   }
 }
 

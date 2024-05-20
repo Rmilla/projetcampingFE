@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +12,20 @@ export class ApiService {
   private token: string | null = null;
   private headers: HttpHeaders;
   private url = 'http://127.0.0.1:8000/gen_em_group/';
-  private selectedVehicule: string;
+  private selectedVehiculeId: string;
+  private selectedCampingName: string;
+  private handleError(error: HttpErrorResponse) {
+    // Log the error or handle it appropriately
+    console.error('An error occurred:', error);
+    // Return an observable with a user-facing error message
+    return throwError('Something bad happened; please try again later.');
+  }
 
   constructor(private http: HttpClient) {
     // Initialisez les headers ici si nécessaire, mais sans utiliser localStorage
     this.headers = new HttpHeaders();
-    this.selectedVehicule = '';
+    this.selectedVehiculeId = '';
+    this.selectedCampingName = '';
   }
 
   login(username: string, password: string): Observable<any> {
@@ -59,7 +69,8 @@ export class ApiService {
   addClient(clientData: any): Observable<any> {
     const requestData = {
       ...clientData,
-       vehicle: this.selectedVehicule
+       vehicle: this.selectedVehiculeId,
+       camping: this.selectedCampingName,
    };
     // Assurez-vous que le token est récupéré de manière sécurisée pour SSR
     this.token = typeof window!== 'undefined'? localStorage.getItem('token') : null;
@@ -71,7 +82,9 @@ export class ApiService {
       // Gérez le cas où le token n'est pas disponible
   }
   getEmissionsData(): Observable<any> {
-    return this.http.get<any>(this.url);
+    return this.http.get<any>(this.url).pipe(
+      catchError(this.handleError)
+    );
   }
   // getEmissionsByCamping(): Observable<any[]> {
   //   // Supposons que cette méthode renvoie les données sous forme de tableau d'objets
