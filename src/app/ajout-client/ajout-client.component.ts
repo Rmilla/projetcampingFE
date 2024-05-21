@@ -53,9 +53,9 @@ export class AjoutClientComponent implements OnInit {
     const clientData = {
       client_city: this.ville, 
       client_country: this.pays,
-      city_camping: this.villecamping,
-      camping: this.selectedCamping,
       vehicle: this.selectedVehicule,
+      camping: this.selectedCamping,
+      city_camping: this.villecamping,
       year: Number(this.annee)
     };
     if (!this.ville ||!this.pays || !this.villecamping) {
