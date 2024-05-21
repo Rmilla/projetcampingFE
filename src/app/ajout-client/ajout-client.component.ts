@@ -21,6 +21,7 @@ export class AjoutClientComponent implements OnInit {
   selectedVehicule: string = '';
   selectedCamping: string = '';
   annee: number = 0;
+  villecamping: string = '';
 
   constructor(private CampingService: CampingService, private apiService: ApiService, private VehiculeService: VehiculeService) { }
  
@@ -35,7 +36,7 @@ export class AjoutClientComponent implements OnInit {
 
   onCampingSelected(campingName: string): void {
     console.log('Camping sélectionné :', campingName);
-    // Effectuez ici l'action souhaitée avec l'ID du camping sélectionné
+    // Effectuez ici l'action souhaitée avec le nem du camping sélectionné
     const selectedCamping = this.campings.find(camping => camping.name === campingName);
     if (selectedCamping) {
       this.selectedCamping = campingName; 
@@ -52,11 +53,16 @@ export class AjoutClientComponent implements OnInit {
     const clientData = {
       client_city: this.ville, 
       client_country: this.pays,
-      selectedCampingName: this.selectedCamping,
-      selectedVehiculeId: this.selectedVehicule,
+      city_camping: this.villecamping,
+      camping: this.selectedCamping,
+      vehicle: this.selectedVehicule,
       year: Number(this.annee)
     };
-  
+    if (!this.ville ||!this.pays || !this.villecamping) {
+      alert('Veuillez remplir tous les champs.');
+      return;
+    }  
+    
     this.apiService.addClient(clientData).subscribe({
       next: (response) => {
         console.log('Client ajouté avec succès', response);

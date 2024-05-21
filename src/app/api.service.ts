@@ -67,18 +67,14 @@ export class ApiService {
   }
 
   addClient(clientData: any): Observable<any> {
-    const requestData = {
-      ...clientData,
-       vehicle: this.selectedVehiculeId,
-       camping: this.selectedCampingName,
-   };
+    console.log('Données envoyées:', clientData);
     // Assurez-vous que le token est récupéré de manière sécurisée pour SSR
     this.token = typeof window!== 'undefined'? localStorage.getItem('token') : null;
       this.headers = new HttpHeaders({
         'Authorization': `Bearer ${this.token}`,
         'Content-Type': 'application/json'
       });
-      return this.http.post<any>('http://127.0.0.1:8000/insert_value/', requestData , { headers: this.headers });
+      return this.http.post<any>('http://127.0.0.1:8000/insert_value/', clientData , { headers: this.headers });
       // Gérez le cas où le token n'est pas disponible
   }
   getEmissionsData(): Observable<any> {
