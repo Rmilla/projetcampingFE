@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router } from 'express';
 
 @Component({
   selector: 'app-authentification',
