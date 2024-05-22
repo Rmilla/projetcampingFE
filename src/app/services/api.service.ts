@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { TapObserver } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,6 @@ import { catchError } from 'rxjs/operators';
 export class ApiService {
   private token: string | null = null;
   private headers: HttpHeaders;
-  private url = 'http://127.0.0.1:8000/gen_em_group/';
   private selectedVehiculeId: string;
   private selectedCampingName: string;
   private handleError(error: HttpErrorResponse) {
@@ -78,11 +78,9 @@ export class ApiService {
       // Gérez le cas où le token n'est pas disponible
   }
   getEmissionsData(): Observable<any> {
-    return this.http.get<any>(this.url).pipe(
+    return this.http.get<any>('http://127.0.0.1:8000/gen_em_group/').pipe(
+      //tap(data => console.log('Données reçues:', data)),
       catchError(this.handleError)
     );
   }
-  // getEmissionsByCamping(): Observable<any[]> {
-  //   // Supposons que cette méthode renvoie les données sous forme de tableau d'objets
-  // }
 }
