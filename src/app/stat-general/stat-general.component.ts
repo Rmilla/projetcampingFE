@@ -1,6 +1,6 @@
 import { Component, OnInit  } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
 import { Chart } from 'chart.js';
 
 @Component({

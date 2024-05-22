@@ -38,14 +38,14 @@
         </div>
     </div>
 
-    <input name="selectedCamping" class="form-control" id="camping" [(ngModel)]="selectedCamping">
+    <input [hidden]="true" name="selectedCamping" class="form-control" id="camping" [(ngModel)]="selectedCamping">
 
-    <input name="selectedVehicule" class="form-control" id="vehicle" [(ngModel)]="selectedVehicule">
+    <input [hidden]="true" name="selectedVehicule" class="form-control" id="vehicle" [(ngModel)]="selectedVehicule">
     
     <div class="d-flex justify-content-between">
 
-      <button class="btn btn-secondary" [hidden]="true" type="button"> Déconnexions </button>
-      <button class="btn btn-primary" [hidden]="true" type="submit"> Ajouter </button>
+      <button class="btn btn-secondary" type="button"> Déconnexions </button>
+      <button class="btn btn-primary" type="submit"> Ajouter </button>
     </div>
     
 </form>

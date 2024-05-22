@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { CampingService } from '../services/camping.service';
-import { VehiculeService } from '../vehicule.service';
+import { VehiculeService } from '../services/vehicule.service';
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../api.service'; // Assurez-vous que le chemin est correct
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-ajout-client',

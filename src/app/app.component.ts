@@ -6,7 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AjoutClientComponent } from './ajout-client/ajout-client.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ApiService } from './api.service';
+import { ApiService } from './services/api.service';
 import { NgIf } from '@angular/common';
 import { NgFor } from '@angular/common';
 
