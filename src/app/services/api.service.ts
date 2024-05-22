@@ -4,7 +4,6 @@ import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { TapObserver } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +28,7 @@ export class ApiService {
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:8000/api/auth/token/', { username, password })
+    return this.http.post<any>('http://127.0.0.1:8000/api/token/', { username, password })
      .pipe(map(response => {
         // Assurez-vous que le stockage du token se fait uniquement dans un environnement de navigateur
         if (typeof window!== 'undefined') {
