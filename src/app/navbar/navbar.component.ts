@@ -1,7 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from 'express';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',

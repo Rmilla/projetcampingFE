@@ -1,58 +1,36 @@
-import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { Chart } from 'chart.js';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-stat-general',
   standalone: true,
-  imports: [],
+  imports: [NgxChartsModule],
   templateUrl: './stat-general.component.html',
   styleUrl: './stat-general.component.css'
 })
-export class StatGeneralComponent implements OnInit {
-  @ViewChild('emissionsChart') emissionsChart!: ElementRef;
-  campings: any[] = [];
-  title = 'ng-chart';
-  chart: any;
+export class StatGeneralComponent implements OnInit{
+  public colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+  };  
+  public view: any[] = [700, 400];
+  public showXAxis = true;
+  public showYAxis = true;
+  public gradient = false;
+  public showLegend = true;
+  public showLabels = true;
+  public animations = true;
+  public xAxisLabel = 'Année';
+  public yAxisLabel = 'Émissions de CO2';
+  public multi = [];
 
 
   constructor(private apiservice: ApiService) {}
  
   ngOnInit(): void {
     this.apiservice.getEmissionsData().subscribe(data => {
-      this.createChart(data);
-    });
-  }
-  createChart(data: any): void {
-    this.chart = new Chart(this.emissionsChart.nativeElement, {
-      type: 'bar',
-      data: {
-        labels: Object.keys(data),
-        datasets: [{
-          label: 'Taux de CO2 par Année',
-          data: Object.values(data),
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
+      this.multi = data;
     });
   }
 }

@@ -9,12 +9,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { NgIf } from '@angular/common';
 import { NgFor } from '@angular/common';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   providers:[ApiService],
-  imports: [NgFor, NgIf, RouterOutlet, RouterLink, RouterLinkActive, AuthentificationComponent, BanniereComponent, FooterComponent, AjoutClientComponent, NavbarComponent, HttpClientModule],
+  imports: [
+    NgFor,
+    NgIf, 
+    RouterOutlet, 
+    RouterLink, 
+    RouterLinkActive, 
+    AuthentificationComponent, 
+    BanniereComponent, 
+    FooterComponent, 
+    AjoutClientComponent, 
+    NavbarComponent, 
+    HttpClientModule, 
+    NgxChartsModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

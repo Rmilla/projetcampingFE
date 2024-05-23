@@ -79,6 +79,11 @@ export class ApiService {
   getEmissionsData(): Observable<any> {
     return this.http.get<any>('http://127.0.0.1:8000/gen_em_group/').pipe(
       //tap(data => console.log('Données reçues:', data)),
+      map(data => {
+        const years = Object.keys(data);
+        const emissions = years.map(year => data[year]);
+        return [{ name: 'Émissions de CO2', series: years.map((year, index) => ({ name: year, value: emissions[index] })) }];
+      }),
       catchError(this.handleError)
     );
   }
