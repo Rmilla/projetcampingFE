@@ -10,7 +10,6 @@ import { ApiService } from './services/api.service';
 import { NgIf } from '@angular/common';
 import { NgFor } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -27,7 +26,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     AjoutClientComponent, 
     NavbarComponent, 
     HttpClientModule, 
-    NgxChartsModule
+    NgxChartsModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
