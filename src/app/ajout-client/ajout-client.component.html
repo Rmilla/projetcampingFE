@@ -1,6 +1,11 @@
 <form class="container p-5" (ngSubmit)="onSubmit()">
     <p>Ajout de client</p>
     <div class="mb-3">
+      <label for="villecamping" class="form-label">Nom du client</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name">
+    </div>
+
+    <div class="mb-3">
       <label for="ville" class="form-label">Ville</label>
       <input type="text" class="form-control" id="ville" [(ngModel)]="ville" name="ville">
     </div>
