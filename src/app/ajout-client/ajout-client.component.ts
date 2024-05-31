@@ -20,7 +20,7 @@ export class AjoutClientComponent implements OnInit {
   selectedCampingName: string = '';
   selectedVehicule: string = '';
   selectedCamping: string = '';
-  annee: number = 0;
+  annee: Date = new Date();
   villecamping: string = '';
   name: string = '';
 
@@ -58,7 +58,7 @@ export class AjoutClientComponent implements OnInit {
       vehicle: this.selectedVehicule,
       camping: this.selectedCamping,
       city_camping: this.villecamping,
-      year: Number(this.annee)
+      date: this.annee
     };
     if (!this.ville ||!this.pays || !this.villecamping) {
       alert('Veuillez remplir tous les champs.');

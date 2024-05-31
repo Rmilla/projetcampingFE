@@ -1,28 +1,64 @@
 <h1>Statistique</h1>
 <div class="container-fluid">
   <div class="row">
-      <div class="col-lg-6">
-        <ngx-charts-line-chart
+
+    <div class="col-lg-6">
+      <ngx-charts-line-chart 
+        [view]="view" 
+        [results]="line" 
+        [xAxis]="true" 
+        [yAxis]="true" 
+        [legend]="true"
+        [legendTitle]="'Emission de CO2'" 
+        [showXAxisLabel]="true" 
+        [showYAxisLabel]="true" 
+        [xAxisLabel]="'Années'"
+        [yAxisLabel]="'Emissions'">
+      </ngx-charts-line-chart>
+    </div>
+
+    <div class="col-lg-6">
+      <ngx-charts-pie-chart 
+        [view]="view" 
+        [results]="pie" 
+        [legend]="true" 
+        [legendTitle]="'Emission par camping'"
+        [labels]="true">
+      </ngx-charts-pie-chart>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-lg-6">
+      <ngx-charts-line-chart
         [view]="view"
-        [results]="line"
+        [results]="transportDistances"
         [xAxis]="true"
         [yAxis]="true"
         [legend]="true"
-        [legendTitle]="'Emission de CO2'" 
+        [legendTitle]="'Véhicule'"
         [showXAxisLabel]="true"
         [showYAxisLabel]="true"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel">
-        </ngx-charts-line-chart>
-      </div>
-      <div class="col-lg-6">
-        <ngx-charts-pie-chart 
-          [results]="pie"
-          [legend]="true"
-          [legendTitle]="'Emission par camping'" 
-          [view]="view"
-          [labels]="true" >
-        </ngx-charts-pie-chart>
-      </div>
+        [xAxisLabel]="'Années'"
+        [yAxisLabel]="'Kilométrages'">
+      </ngx-charts-line-chart>
     </div>
+    
+    <div class="col-lg-6">
+      <ngx-charts-line-chart
+        [title]="'Emission par véhicule'"
+        [view]="view"
+        [results]="transportEmissions"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [legendTitle]="'Véhicule'"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="'Années'"
+        [yAxisLabel]="'Emissions'">
+      </ngx-charts-line-chart>
+    </div>
+
+  </div>
 </div>

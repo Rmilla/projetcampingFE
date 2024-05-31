@@ -4,7 +4,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CommonModule } from '@angular/common';
 
 
-
+// Définition des interfaces pour les données attendues
 @Component({
   selector: 'app-stat-general',
   standalone: true,
@@ -18,11 +18,11 @@ export class StatGeneralComponent implements OnInit{
   };  
 
   public view: [number, number] = [700, 400];
-  public xAxisLabel = 'year';
-  public yAxisLabel = 'emissions';
   public line: any[] = [];
   public pie: any[] = [];
-  public years = Array.from({ length: 12 }, (_, i) => 2023 - i); // Ajustez la plage d'années selon vos besoins
+  public transportDistances: any[] = [];
+  public transportEmissions: any[] = [];
+  public years = Array.from({ length: 12 }, (_, i) => 2023 - i); // Génère les années de 2013 à 2023
 
 
   constructor(private apiservice: ApiService) {}
@@ -30,6 +30,7 @@ export class StatGeneralComponent implements OnInit{
  
   ngOnInit(): void {
     const year = 2023;
+
     this.apiservice.getEmissionsData().subscribe(data => {
       this.line = [{
         name: 'Emissions de CO2',
@@ -41,13 +42,39 @@ export class StatGeneralComponent implements OnInit{
     });
 
     this.apiservice.getPieData(year).subscribe(data => {
-      console.log(data);
       // Transformation des données pour correspondre au format attendu par ngx-charts
       this.pie = Object.entries(data).map(([name, value]) => ({
         name: name.replace(/_/g, ' ').toUpperCase(), // Remplace les underscores par des espaces et met en majuscule
         value: Number(value)
       }));
     });
+
+    this.apiservice.getTransportDistances().subscribe(data => {
+      this.transportDistances = this.transformTransportDistancesData(data);
+    });
+
+    this.apiservice.getTransportEmission().subscribe(data => {
+      this.transportEmissions = this.transformTransportEmissionData(data);
+    });
+  }
+
+  transformTransportDistancesData(data: {vehicle: string; distances: number[]}[]): any[] {
+    return data.map(vehicleData => ({
+      name: vehicleData.vehicle,
+      series: vehicleData.distances.map((distance, index) => ({
+        name: this.years[index],
+        value: distance
+      }))
+    }));
+  }
+
+  transformTransportEmissionData(data: {vehicle: string; emissions: number[]}[]): any[] {
+    return data.map(vehicleData => ({
+      name: vehicleData.vehicle,
+      series: vehicleData.emissions.map((emissions, index) => ({
+        name: this.years[index],
+        value: emissions
+      }))
+    }));
   }
 }
-

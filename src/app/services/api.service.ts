@@ -134,4 +134,20 @@ export class ApiService {
       catchError(this.handleError)
     );
   }
+  getTransportEmission(): Observable<{vehicle: string; emissions: number[]}[]> {
+    this.token = typeof window!== 'undefined'? localStorage.getItem('token') : null;
+    if (!this.token) {
+      console.error('No token available');
+      return of([]);
+    }
+    this.headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`,
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http.get<{vehicle: string; emissions: number[]}[]>('http://127.0.0.1:8000/emissions_by_mean_of_transport/', { headers: this.headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 }
