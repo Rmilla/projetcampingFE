@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CommonModule } from '@angular/common';
@@ -69,6 +69,13 @@ export class StatGeneralComponent implements OnInit{
     }));
   }
 
+  ngOnChanges(changes: SimpleChanges): void { // Utilisez ngOnChanges au lieu de onChanges
+    if (changes.hasOwnProperty('selectedYear')) {
+      console.log('ngOnChanges triggered for selectedYear:', changes.hasOwnProperty('selectedYear'));
+      this.updatePieChart();
+    }
+  }
+
   transformTransportEmissionData(data: {vehicle: string; emissions: number[]}[]): any[] {
     return data.map(vehicleData => ({
       name: vehicleData.vehicle,
@@ -78,9 +85,11 @@ export class StatGeneralComponent implements OnInit{
       }))
     }));
   }
+
+
+
   updatePieChart(): void {
     this.apiservice.getPieData(this.selectedYear).subscribe(data => {
-      // Transformation des données pour correspondre au format attendu par ngx-charts
       this.pie = Object.entries(data).map(([name, value]) => ({
         name: name.replace(/_/g, ' ').toUpperCase(),
         value: Number(value)
