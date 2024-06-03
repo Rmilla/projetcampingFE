@@ -71,8 +71,11 @@ export class ApiService {
       'Authorization': `Bearer ${this.token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.post<any>('http://127.0.0.1:8000/insert_value/', clientData, { headers: this.headers });
-    // Gérez le cas où le token n'est pas disponible
+    return this.http.post<any>('http://127.0.0.1:8000/insert_value/', clientData, { headers: this.headers })
+      .pipe(
+        catchError(this.handleError)
+        // Gérez le cas où le token n'est pas disponible
+      );
   }
 
   getEmissionsData(): Observable<{ year: number; emissions: number }[]> {
@@ -115,39 +118,40 @@ export class ApiService {
     // Utilisez HttpParams pour construire les paramètres de requête
     const body = JSON.stringify({ year: year });
 
-    return this.http.post<{ emissions: number }[]>('http://127.0.0.1:8000/pie_chart/',body ,{ headers: this.headers}).pipe(
-      catchError(this.handleError)
-    );
-  }
-  getTransportDistances(): Observable<{vehicle: string; distances: number[]}[]> {
-    this.token = typeof window!== 'undefined'? localStorage.getItem('token') : null;
-    if (!this.token) {
-      console.error('No token available');
-      return of([]);
-    }
-    this.headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`,
-      'Content-Type': 'application/json'
-    });
-  
-    return this.http.get<{vehicle: string; distances: number[]}[]>('http://127.0.0.1:8000/distances_by_mean_of_transport/', { headers: this.headers }).pipe(
-      catchError(this.handleError)
-    );
-  }
-  getTransportEmission(): Observable<{vehicle: string; emissions: number[]}[]> {
-    this.token = typeof window!== 'undefined'? localStorage.getItem('token') : null;
-    if (!this.token) {
-      console.error('No token available');
-      return of([]);
-    }
-    this.headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`,
-      'Content-Type': 'application/json'
-    });
-  
-    return this.http.get<{vehicle: string; emissions: number[]}[]>('http://127.0.0.1:8000/emissions_by_mean_of_transport/', { headers: this.headers }).pipe(
+    return this.http.post<{ emissions: number }[]>('http://127.0.0.1:8000/pie_chart/', body, { headers: this.headers }).pipe(
       catchError(this.handleError)
     );
   }
 
+  getTransportDistances(): Observable<{ vehicle: string; distances: number[] }[]> {
+    this.token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    if (!this.token) {
+      console.error('No token available');
+      return of([]);
+    }
+    this.headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get<{ vehicle: string; distances: number[] }[]>('http://127.0.0.1:8000/distances_by_mean_of_transport/', { headers: this.headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getTransportEmission(): Observable<{ vehicle: string; emissions: number[] }[]> {
+    this.token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    if (!this.token) {
+      console.error('No token available');
+      return of([]);
+    }
+    this.headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get<{ vehicle: string; emissions: number[] }[]>('http://127.0.0.1:8000/emissions_by_mean_of_transport/', { headers: this.headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
 }

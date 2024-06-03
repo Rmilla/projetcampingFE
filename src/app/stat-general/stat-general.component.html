@@ -25,7 +25,7 @@
         [legendTitle]="'Emission par camping'"
         [labels]="true">
       </ngx-charts-pie-chart>
-      <select [(ngModel)]="selectedYear">
+      <select [(ngModel)]="selectedYear" (change)="updatePieChart()">
         <option *ngFor="let year of years" [value]="year">{{ year }}</option>
       </select>
     </div>

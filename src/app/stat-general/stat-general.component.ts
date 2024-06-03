@@ -17,7 +17,7 @@ export class StatGeneralComponent implements OnInit{
   public colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
   };  
-
+  
   public view: [number, number] = [700, 400];
   public line: any[] = [];
   public pie: any[] = [];
@@ -25,6 +25,7 @@ export class StatGeneralComponent implements OnInit{
   public transportEmissions: any[] = [];
   public years = Array.from({ length: 12 }, (_, i) => 2023 - i); // Génère les années de 2013 à 2023
   public selectedYear: number = 2023;
+  public date = new Date("2023-01-10")
 
   constructor(private apiservice: ApiService) {}
 
@@ -85,8 +86,6 @@ export class StatGeneralComponent implements OnInit{
       }))
     }));
   }
-
-
 
   updatePieChart(): void {
     this.apiservice.getPieData(this.selectedYear).subscribe(data => {

@@ -38,7 +38,7 @@ export class AjoutClientComponent implements OnInit {
   onCampingSelected(campingName: string): void {
     console.log('Camping sélectionné :', campingName);
     // Effectuez ici l'action souhaitée avec le nem du camping sélectionné
-    const selectedCamping = this.campings.find(camping => camping.name === campingName);
+    const selectedCamping = this.campings.find(camping => camping.nom_camping === campingName);
     if (selectedCamping) {
       this.selectedCamping = campingName; 
     }
@@ -60,7 +60,7 @@ export class AjoutClientComponent implements OnInit {
       city_camping: this.villecamping,
       date: this.annee
     };
-    if (!this.ville ||!this.pays || !this.villecamping) {
+    if (!this.name||!this.annee||!this.selectedCamping||!this.selectedVehicule||!this.ville ||!this.pays ||!this.villecamping) {
       alert('Veuillez remplir tous les champs.');
       return;
     }  

@@ -16,6 +16,7 @@ export class AuthentificationComponent {
   username!: string;
   password!: string;
   test:any;
+  errorMessage: string = '';
 
   constructor(private apiService: ApiService, private router: Router) { }
 
@@ -34,6 +35,7 @@ export class AuthentificationComponent {
       error => {
         // Traitement en cas d'échec de la connexion
         console.error('Erreur de connexion', error);
+        this.errorMessage = 'Échec de l\'authentification. Veuillez réessayer.'; 
       }
  
     );
