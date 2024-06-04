@@ -43,6 +43,15 @@ export class ApiService {
       }));
   }
 
+  logout(): void {
+    // Supprimez le token du localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('token');
+    }
+    // Réinitialisez le token dans le service
+    this.token = null;
+  }
+
   printF(): Observable<any> {
     // Assurez-vous que le token est récupéré de manière sécurisée pour SSR
     this.token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
