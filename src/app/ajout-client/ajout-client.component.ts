@@ -68,9 +68,11 @@ export class AjoutClientComponent implements OnInit {
     this.apiService.addClient(clientData).subscribe({
       next: (response) => {
         console.log('Client ajouté avec succès', response);
+        alert('Client ajouté avec succès')
       },
       error: (error) => {
         console.error('Erreur lors de l\'ajout du client', error);
+        alert('Erreur lors de l\'ajout du client' )
       }
     });
   }
