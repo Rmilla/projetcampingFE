@@ -41,6 +41,9 @@ export class AjoutClientComponent implements OnInit {
     const selectedCamping = this.campings.find(camping => camping.nom_camping === campingName);
     if (selectedCamping) {
       this.selectedCamping = campingName; 
+      this.villecamping = selectedCamping.ville_camping
+    } else {
+      console.error('Camping non trouvé');
     }
   }
 
