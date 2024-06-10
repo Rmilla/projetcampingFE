@@ -23,7 +23,7 @@ export class StatGeneralComponent implements OnInit{
   public pie: any[] = [];
   public transportDistances: any[] = [];
   public transportEmissions: any[] = [];
-  public years = Array.from({ length: 12 }, (_, i) => 2023 - i); // Génère les années de 2013 à 2023
+  public years = Array.from({ length: 11 }, (_, i) => 2023 - i); // Génère les années de 2013 à 2023
   public selectedYear: number = 2023;
   public date = new Date("2023-01-10")
 
@@ -32,7 +32,7 @@ export class StatGeneralComponent implements OnInit{
  
   ngOnInit(): void {
     this.updatePieChart();
-
+    
     this.apiservice.getEmissionsData().subscribe(data => {
       this.line = [{
         name: 'Emissions de CO2',
@@ -64,7 +64,7 @@ export class StatGeneralComponent implements OnInit{
     return data.map(vehicleData => ({
       name: vehicleData.vehicle,
       series: vehicleData.distances.map((distance, index) => ({
-        name: this.years[index],
+        name: this.years[this.years.length - 1 - index].toString(),
         value: distance
       }))
     }));
@@ -78,11 +78,12 @@ export class StatGeneralComponent implements OnInit{
   }
 
   transformTransportEmissionData(data: {vehicle: string; emissions: number[]}[]): any[] {
+    const years = Array.from({ length: 10 }, (_, i) => 2023 - i); // Génère les années de 2023 à 2014
     return data.map(vehicleData => ({
       name: vehicleData.vehicle,
-      series: vehicleData.emissions.map((emissions, index) => ({
-        name: this.years[index],
-        value: emissions
+      series: vehicleData.emissions.map((emission, index) => ({
+        name: this.years[this.years.length - 1 - index].toString(), // Assurez-vous que l'année correspondante est bien mappée à l'indice
+        value: emission
       }))
     }));
   }
