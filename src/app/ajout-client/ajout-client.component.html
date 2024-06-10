@@ -1,40 +1,39 @@
 <form class="container p-5" (ngSubmit)="onSubmit()">
-    <p>Ajout de client</p>
+  <p>Ajout de client</p>
+  <div class="mb-3">
+    <label for="name" class="form-label">Nom du client</label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name">
+  </div>
+  <div class="mb-3">
+    <label for="ville" class="form-label">Ville</label>
+    <input type="text" class="form-control" id="ville" [(ngModel)]="ville" name="ville">
+  </div>
+  <div class="mb-3">
+    <label for="pays" class="form-label">Pays</label>
+    <input type="text" class="form-control" id="pays" [(ngModel)]="pays" name="pays">
+  </div>
+  <div class="mb-3">
+    <label for="annees" class="form-label">Date</label>
+    <input type="date" class="form-control" id="annees" [(ngModel)]="annee" name="annee">
+  </div>
+  <div class="d-flex justify-content-between">
     <div class="mb-3">
-      <label for="name" class="form-label">Nom du client</label>
-      <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name">
+      <label for="vehicle-select" class="form-label">Choisissez un mode de transport</label>
+      <select class="form-select" id="vehicle-select" [(ngModel)]="selectedVehicule" name="selectedVehicule">
+        <option *ngFor="let vehicule of vehicules" [value]="vehicule.id">{{ vehicule.name }}</option>
+      </select>
     </div>
     <div class="mb-3">
-      <label for="ville" class="form-label">Ville</label>
-      <input type="text" class="form-control" id="ville" [(ngModel)]="ville" name="ville">
+      <label for="camping-select" class="form-label">Choisissez un camping</label>
+      <select class="form-select" id="camping-select" [(ngModel)]="selectedCampingIndex" name="selectedCamping" (ngModelChange)="onCampingSelected($event)">
+        <option *ngFor="let camping of campings; let i=index" [value]="i">{{ camping.nom_camping }}</option>
+      </select>
     </div>
-    <div class="mb-3">
-      <label for="pays" class="form-label">Pays</label>
-      <input type="text" class="form-control" id="pays" [(ngModel)]="pays" name="pays">
-    </div>
-    <div class="mb-3">
-      <label for="annees" class="form-label">Date</label>
-      <input type="date" class="form-control" id="annees" [(ngModel)]="annee" name="annee">
-    </div>
-    <div class="d-flex justify-content-between">
-      <div class="mb-3">
-        <label for="vehicle-select" class="form-label">Choisissez un mode de transport</label>
-        <select class="form-select" id="vehicle-select" [(ngModel)]="selectedVehicule" name="selectedVehicule">
-          <option *ngFor="let vehicule of vehicules" [value]="vehicule.id">{{ vehicule.name }}</option>
-        </select>
-      </div>
-        <div class="mb-3">
-          <label for="camping-select" class="form-label">Choisissez un camping</label>
-          <select class="form-select" id="camping-select" [(ngModel)]="selectedCamping" name="selectedCampingId">
-            <option *ngFor="let camping of campings" [value]="camping.nom_camping">{{ camping.nom_camping }}</option>
-          </select>
-        </div>
-      </div>
-    <input [hidden]="true" name="selectedCamping" class="form-control" id="camping" [(ngModel)]="selectedCamping">
-    <input class="form-control" id="villecamping" [(ngModel)]="villecamping" name="villecamping">
-    <input [hidden]="true" name="selectedVehicule" class="form-control" id="vehicle" [(ngModel)]="selectedVehicule">
-    <div class="d-flex justify-content-between">
-      <button class="btn btn-secondary" type="button"> Déconnexion </button>
-      <button class="btn btn-primary" type="submit"> Ajouter </button>
-    </div>
+  </div>
+  <input name="selectedCamping" class="form-control invisible" id="camping" [(ngModel)]="selectedCamping">
+  <input name="villecamping" class="form-control invisible" id="villecamp" [(ngModel)]="villecamping">
+  <input name="selectedVehicule" class="form-control invisible" id="vehicle" [(ngModel)]="selectedVehicule">
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-primary" type="submit"> Ajouter </button>
+  </div>
 </form>

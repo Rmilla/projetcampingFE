@@ -10,6 +10,7 @@ import { ApiService } from './services/api.service';
 import { NgIf } from '@angular/common';
 import { NgFor } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -27,6 +28,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NavbarComponent, 
     HttpClientModule, 
     NgxChartsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

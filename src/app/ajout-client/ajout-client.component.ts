@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { CampingService } from '../services/camping.service';
 import { VehiculeService } from '../services/vehicule.service';
 import { NgFor } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, FormGroup, FormControl } from '@angular/forms'; 
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -23,8 +23,20 @@ export class AjoutClientComponent implements OnInit {
   annee: Date = new Date();
   villecamping: string = '';
   name: string = '';
+  formGroup: FormGroup;
+  selectedCampingIndex: number = -1;
 
-  constructor(private CampingService: CampingService, private apiService: ApiService, private VehiculeService: VehiculeService) { }
+  constructor(private fb: FormBuilder, private CampingService: CampingService, private apiService: ApiService, private VehiculeService: VehiculeService) {
+    this.formGroup = this.fb.group({
+      name: [''],
+      ville: [''],
+      pays: [''],
+      annee: [''],
+      selectedVehicule: [''],
+      selectedCamping: [''],
+      villecamping: ['']
+    });
+  }
  
   ngOnInit(): void {
      this.CampingService.getCampings().subscribe(data => {
@@ -33,24 +45,23 @@ export class AjoutClientComponent implements OnInit {
      this.VehiculeService.getVehicules().subscribe(data => {
       this.vehicules = Object.keys(data).map(key => ({ id: key, name: key }));
     });
-  }
-
-  onCampingSelected(campingName: string): void {
-    console.log('Camping sélectionné :', campingName);
-    // Effectuez ici l'action souhaitée avec le nem du camping sélectionné
-    const selectedCamping = this.campings.find(camping => camping.nom_camping === campingName);
-    if (selectedCamping) {
-      this.selectedCamping = campingName; 
-      this.villecamping = selectedCamping.ville_camping
-    } else {
-      console.error('Camping non trouvé');
-    }
+    this.formGroup = new FormGroup({
+      selectedCamping: new FormControl(''),
+      villecamping: new FormControl('')
+    });
   }
 
   onVehiculeSelected(vehiculeId: string): void {
-    console.log('Camping sélectionné :', vehiculeId)
+    console.log('Vehicule sélectionné :', vehiculeId)
     this.selectedVehicule = vehiculeId;
 
+  }
+  onCampingSelected(index: number): void {
+    const camping = this.campings[index];
+    if (camping) {
+      this.villecamping = camping.ville_camping; // Met à jour la ville du camping
+      this.selectedCamping = camping.nom_camping; // Met à jour le nom du camping sélectionné
+    }
   }
 
   onSubmit(): void {
