@@ -82,7 +82,7 @@ export class StatGeneralComponent implements OnInit{
     return data.map(vehicleData => ({
       name: vehicleData.vehicle,
       series: vehicleData.emissions.map((emission, index) => ({
-        name: this.years[this.years.length - 1 - index].toString(), // Assurez-vous que l'année correspondante est bien mappée à l'indice
+        name: this.years[this.years.length - 1 - index].toString(), 
         value: emission
       }))
     }));
